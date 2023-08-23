@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
-public class Lens extends Equipment {
+public class Lens extends Storeable {
 
     private long id;
     private String name;

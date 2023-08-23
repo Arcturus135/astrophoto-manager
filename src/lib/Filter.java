@@ -2,10 +2,9 @@ package lib;
 
 import org.json.JSONObject;
 
-import java.util.Objects;
 import java.util.Random;
 
-public class Filter extends Equipment {
+public class Filter extends Storeable {
 
     private long id;
     private String name;

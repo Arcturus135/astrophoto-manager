@@ -1,9 +1,13 @@
 package lib;
 
+import gui.MainFrame;
+import org.json.JSONObject;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-public class Session {
+public class Session extends Storeable {
 
     private long id;
     private String name;
@@ -46,6 +50,58 @@ public class Session {
         this.exposure = exposure;
         this.number = number;
         this.gain = gain;
+    }
+
+    public JSONObject toJSONObject() {
+        JSONObject object = new JSONObject();
+        object.put("id", id);
+        object.put("name", name);
+        object.put("date", getDateAsString());
+        object.put("camera", camera.getId());
+        object.put("filter", filter.getId());
+        object.put("telescope", telescope.getId());
+        object.put("lens", lens.getId());
+        object.put("temp", temp);
+        object.put("exposure", exposure);
+        object.put("number", number);
+        object.put("gain", gain);
+        return object;
+    }
+
+    public static Session fromJSONObject(JSONObject object) {
+        Camera c = (Camera) getObject(object.getLong("camera"));
+        Telescope t = (Telescope) getObject(object.getLong("telescope"));
+        Lens l = (Lens) getObject(object.getLong("lens"));
+        Filter f = (Filter) getObject(object.getLong("filter"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate d =  LocalDate.parse(object.getString("date"), formatter);
+
+        return new Session(
+                object.getLong("id"),
+                object.getString("name"),
+                d, c, f, t, l,
+                object.getDouble("temp"),
+                object.getDouble("exposure"),
+                object.getInt("number"),
+                object.getInt("gain")
+        );
+    }
+
+    public String getDateAsString() {
+        String day = date.getDayOfMonth() + "";
+        if (date.getDayOfMonth()<10) day = "0" + day;
+        String month = date.getMonthValue() + "";
+        if (date.getMonthValue()<10) month = "0" + month;
+        String year = date.getYear() + "";
+        return day + "." + month + "." + year;
+    }
+
+    public static Storeable getObject(long id) {
+        for (Storeable storeable : MainFrame.manager.cameras) if (storeable.getId() == id) return storeable;
+        for (Storeable storeable : MainFrame.manager.telescopes) if (storeable.getId() == id) return storeable;
+        for (Storeable storeable : MainFrame.manager.lenses) if (storeable.getId() == id) return storeable;
+        for (Storeable storeable : MainFrame.manager.filters) if (storeable.getId() == id) return storeable;
+        return null;
     }
 
     @Override

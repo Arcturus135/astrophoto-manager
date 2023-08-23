@@ -16,12 +16,14 @@ public class Manager {
     public List<Telescope> telescopes;
     public List<Lens> lenses;
     public List<Filter> filters;
+    public List<Session> sessions;
 
     public Manager() {
         cameras = reloadCameras();
         telescopes = reloadTelescopes();
         lenses = reloadLenses();
         filters = reloadFilters();
+        sessions = reloadSessions();
     }
 
     private JSONArray loadArray(String path) {
@@ -106,17 +108,21 @@ public class Manager {
         return (List<Filter>) reload("filters.json", Filter.class);
     }
 
-    public List<? extends Equipment> reload(String path, Class<? extends Equipment> clazz) {
+    public List<Session> reloadSessions() {
+        return (List<Session>) reload("sessions.json", Session.class);
+    }
+
+    public List<? extends Storeable> reload(String path, Class<? extends Storeable> clazz) {
         JSONArray array = loadArray(path);
-        List<Equipment> list = new ArrayList<>();
+        List<Storeable> list = new ArrayList<>();
         if (array.isEmpty()) return list;
 
         for (int i=0;i<array.length();i++) {
             JSONObject object = array.getJSONObject(i);
             try {
                 Method m = clazz.getMethod("fromJSONObject", JSONObject.class);
-                Equipment equipment = (Equipment) m.invoke(null, object);
-                list.add(clazz.cast(equipment));
+                Storeable storeable = (Storeable) m.invoke(null, object);
+                list.add(clazz.cast(storeable));
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
@@ -213,11 +219,15 @@ public class Manager {
         save("filters.json", filters);
     }
 
-    public void save(String path, List<? extends Equipment> list) {
+    public void saveSessions() {
+        save("sessions.json", sessions);
+    }
+
+    public void save(String path, List<? extends Storeable> list) {
         JSONArray array = new JSONArray(list.size());
         if (!list.isEmpty())
-            for (Equipment equipment : list) {
-                array.put(equipment.toJSONObject());
+            for (Storeable storeable : list) {
+                array.put(storeable.toJSONObject());
             }
 
         try {

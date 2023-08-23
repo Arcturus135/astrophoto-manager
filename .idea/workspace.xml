@@ -4,38 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aae1efa4-1f19-4351-b8a1-42d203fb254c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/json_20230618.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CamerasFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CamerasFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CreateCameraFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CreateCameraFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CreateFilterFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CreateFilterFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CreateLensFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CreateLensFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CreateTelescopeFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/CreateTelescopeFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/FiltersFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/FiltersFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/LensesFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/LensesFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/MainFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/MainFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/TelescopesFrame.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/TelescopesFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/Astrophoto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/Camera.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/Equipment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/Filter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/Lens.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/Manager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/Session.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/Telescope.java" afterDir="false" />
+    <list default="true" id="aae1efa4-1f19-4351-b8a1-42d203fb254c" name="Changes" comment="Initial Commit">
+      <change afterPath="$PROJECT_DIR$/src/gui/CreateSessionFrame.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/CreateSessionFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/astrophoto-manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/astrophoto-manager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Astrophoto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Astrophoto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Storeable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Lens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Lens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Telescope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Telescope.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,21 +44,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/paulo/Downloads/json-20230618.jar&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/paulo/IdeaProjects/astrophoto-manager/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/paulo/Downloads/json-20230618.jar",
+    "onboarding.tips.debug.path": "C:/Users/paulo/IdeaProjects/astrophoto-manager/src/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -88,7 +68,20 @@
       <option name="presentableId" value="Default" />
       <updated>1692699585730</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1692737154317</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1692737154317</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
