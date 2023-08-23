@@ -1,6 +1,7 @@
 package gui;
 
 import lib.Filter;
+import lib.Manager;
 
 import javax.swing.*;
 import java.util.Objects;
@@ -27,19 +28,19 @@ public class FiltersFrame extends JFrame {
         newFilterButton.addActionListener(e -> new CreateFilterFrame());
 
         deleteButton.addActionListener(e -> {
-            Filter filter = MainFrame.manager.filters.get(listFilters.getSelectedIndex());
-            MainFrame.manager.filters.remove(filter);
-            MainFrame.manager.saveFilters();
+            Filter filter = Manager.filters.get(listFilters.getSelectedIndex());
+            Manager.filters.remove(filter);
+            Manager.saveFilters();
             dispose();
         });
 
         saveButton.addActionListener(e -> {
             if (checkInputs()) {
-                Filter filter = MainFrame.manager.filters.get(listFilters.getSelectedIndex());
+                Filter filter = Manager.filters.get(listFilters.getSelectedIndex());
                 filter.setName(textFieldName.getText());
                 filter.setConnection(Double.parseDouble(Objects.requireNonNull(comboBoxConnection.getSelectedItem())
                         .toString().replace("''", "")));
-                MainFrame.manager.saveFilters();
+                Manager.saveFilters();
                 new FiltersFrame();
                 dispose();
             } else JOptionPane.showConfirmDialog(FiltersFrame.this,
@@ -52,14 +53,14 @@ public class FiltersFrame extends JFrame {
         deleteButton.setVisible(false);
         saveButton.setVisible(false);
 
-        String[] array = new String[MainFrame.manager.filters.toArray().length];
-        for (int i=0;i<MainFrame.manager.filters.toArray().length;i++) {
-            array[i] = ((Filter) MainFrame.manager.filters.toArray()[i]).getName();
+        String[] array = new String[Manager.filters.toArray().length];
+        for (int i=0;i<Manager.filters.toArray().length;i++) {
+            array[i] = ((Filter) Manager.filters.toArray()[i]).getName();
         }
         listFilters.setListData(array);
 
         listFilters.addListSelectionListener(e -> {
-            Filter filter = MainFrame.manager.filters.get(listFilters.getSelectedIndex());
+            Filter filter = Manager.filters.get(listFilters.getSelectedIndex());
             textFieldName.setText(filter.getName());
             if (filter.getConnection() == 1.25) comboBoxConnection.setSelectedIndex(0);
             else comboBoxConnection.setSelectedIndex(1);

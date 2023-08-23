@@ -1,6 +1,7 @@
 package gui;
 
 import lib.Lens;
+import lib.Manager;
 
 import javax.swing.*;
 import java.util.Objects;
@@ -28,8 +29,8 @@ public class CreateLensFrame extends JFrame {
                 Lens lens = new Lens(textFieldName.getText(), Double.parseDouble(textFieldFactor.getText()),
                         Double.parseDouble(Objects.requireNonNull(comboBoxConnection.getSelectedItem())
                                 .toString().replace("''", "")));
-                MainFrame.manager.lenses.add(lens);
-                MainFrame.manager.saveLenses();
+                Manager.lenses.add(lens);
+                Manager.saveLenses();
                 dispose();
             } else {
                 JOptionPane.showConfirmDialog(CreateLensFrame.this,

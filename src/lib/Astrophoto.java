@@ -6,9 +6,7 @@ import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Astrophoto extends Storeable {
 
@@ -72,10 +70,10 @@ public class Astrophoto extends Storeable {
         object.put("id", id);
         object.put("name", name);
         object.put("sessions", getAsJSONArray(sessions));
-        object.put("camera", camera.getId());
+        object.put("camera", camera != null ? camera.getId() : 0);
         object.put("filters", getAsJSONArray(filters));
-        object.put("telescope", telescope.getId());
-        object.put("lens", lens.getId());
+        object.put("telescope", telescope != null ? telescope.getId() : 0);
+        object.put("lens", lens != null ? lens.getId() : 0);
         object.put("dateStart", getDateAsString(dateStart));
         object.put("dateEnd", getDateAsString(dateEnd));
         object.put("temps", getTempsAsJSONArray());
@@ -88,11 +86,11 @@ public class Astrophoto extends Storeable {
     }
 
     public static Astrophoto fromJSONObject(JSONObject object) {
-        List<Session> s = (List<Session>) getFromJSONArray(object.getJSONArray("sessions"));
-        Camera c = (Camera) getObject(object.getLong("camera"));
-        List<Filter> f = (List<Filter>) getFromJSONArray(object.getJSONArray("filter"));
-        Telescope t = (Telescope) getObject(object.getLong("telescope"));
-        Lens l = (Lens) getObject(object.getLong("lens"));
+        List<Session> s = (List<Session>) getFromJSONArray(object.getJSONArray("sessions"), Manager.sessions);
+        Camera c = object.getLong("camera") != 0 ? (Camera) Manager.getObject(object.getLong("camera"), Manager.cameras) : null;
+        List<Filter> f = (List<Filter>) getFromJSONArray(object.getJSONArray("filters"), Manager.filters);
+        Telescope t = object.getLong("telescope") != 0 ? (Telescope) Manager.getObject(object.getLong("telescope"), Manager.telescopes) : null;
+        Lens l = object.getLong("lens") != 0 ? (Lens) Manager.getObject(object.getLong("lens"), Manager.lenses) : null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate ds =  LocalDate.parse(object.getString("dateStart"), formatter);
         LocalDate de =  LocalDate.parse(object.getString("dateEnd"), formatter);
@@ -129,10 +127,10 @@ public class Astrophoto extends Storeable {
         return array;
     }
 
-    private static List<? extends Storeable> getFromJSONArray(JSONArray array) {
+    private static List<? extends Storeable> getFromJSONArray(JSONArray array, List<? extends Storeable> l) {
         List<Storeable> list = new ArrayList<>();
         for (int i=0;i<array.length();i++) {
-            list.add(getObject(array.getLong(i)));
+            list.add(Manager.getObject(array.getLong(i), l));
         }
         return list;
     }
@@ -160,14 +158,6 @@ public class Astrophoto extends Storeable {
         if (date.getMonthValue()<10) month = "0" + month;
         String year = date.getYear() + "";
         return day + "." + month + "." + year;
-    }
-
-    public static Storeable getObject(long id) {
-        for (Storeable storeable : MainFrame.manager.cameras) if (storeable.getId() == id) return storeable;
-        for (Storeable storeable : MainFrame.manager.telescopes) if (storeable.getId() == id) return storeable;
-        for (Storeable storeable : MainFrame.manager.lenses) if (storeable.getId() == id) return storeable;
-        for (Storeable storeable : MainFrame.manager.filters) if (storeable.getId() == id) return storeable;
-        return null;
     }
 
     @Override
@@ -206,11 +196,11 @@ public class Astrophoto extends Storeable {
             this.dateStart = getLowestDate();
             this.dateEnd = getHighestDate();
             this.temps = new ArrayList<>();
-            for (Session session : sessions) temps.add(session.getTemp());
+            for (Session session : sessions) if (!temps.contains(session.getTemp())) temps.add(session.getTemp());
             this.exposure = 0;
             for (Session session : sessions) exposure = exposure + (session.getExposure()*session.getNumber());
             this.gains = new ArrayList<>();
-            for (Session session : sessions) gains.add(session.getGain());
+            for (Session session : sessions) if (!gains.contains(session.getGain())) gains.add(session.getGain());
         }
     }
 
@@ -241,6 +231,40 @@ public class Astrophoto extends Storeable {
     public void removeSession(int index) {
         sessions.remove(index);
         update();
+    }
+
+    public List<String> getTempsWithUnit() {
+        List<String> list = new ArrayList<>();
+        for (double temp : temps) list.add(temp + "°C");
+        return list;
+    }
+
+    public String getExposureSimple() {
+        if (exposure >= 1) {
+            int mil = (int) ((exposure % 1)*1000);
+            int sec = (int) (exposure);
+            if (sec >= 60) {
+                sec = (int) (exposure % 60);
+                int min = (int) (exposure / 60);
+                if (min >= 60) {
+                    min = (int) (exposure % 3600);
+                    int h = (int) (exposure / 3600);
+                    if (h >= 24) {
+                        h = (int) (exposure % (3600*24));
+                        int d = (int) (exposure /(3600*24));
+                        return expRemoveZero(d, "d ", h, "h ", min, "m ", sec, "s ", mil, "ms");
+                    } else return expRemoveZero(h, "h ", min, "m ", sec, "s ", mil, "ms");
+                } else return expRemoveZero(min, "m ", sec, "s ", mil, "ms");
+            } else return expRemoveZero(sec, "s ", mil, "ms");
+        } else return expRemoveZero(exposure*1000, "ms");
+    }
+
+    private String expRemoveZero(Object... args) {
+        StringBuilder out = new StringBuilder();
+        for (int i=0;i<args.length;i=i+2)
+            if (!args[i].toString().equalsIgnoreCase("0"))
+                out.append(args[i].toString()).append(args[i + 1].toString());
+        return out.toString();
     }
 
     public Telescope getTelescope() {

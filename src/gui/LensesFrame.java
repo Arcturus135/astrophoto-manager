@@ -1,6 +1,7 @@
 package gui;
 
 import lib.Lens;
+import lib.Manager;
 
 import javax.swing.*;
 import java.util.Objects;
@@ -28,20 +29,20 @@ public class LensesFrame extends JFrame {
         newLensButton.addActionListener(e -> new CreateLensFrame());
 
         deleteButton.addActionListener(e -> {
-            Lens lens = MainFrame.manager.lenses.get(listLenses.getSelectedIndex());
-            MainFrame.manager.lenses.remove(lens);
-            MainFrame.manager.saveLenses();
+            Lens lens = Manager.lenses.get(listLenses.getSelectedIndex());
+            Manager.lenses.remove(lens);
+            Manager.saveLenses();
             dispose();
         });
 
         saveButton.addActionListener(e -> {
             if (checkInputs()) {
-                Lens lens = MainFrame.manager.lenses.get(listLenses.getSelectedIndex());
+                Lens lens = Manager.lenses.get(listLenses.getSelectedIndex());
                 lens.setName(textFieldName.getText());
                 lens.setFactor(Double.parseDouble(textFieldFactor.getText()));
                 lens.setConnection(Double.parseDouble(Objects.requireNonNull(comboBoxConnection.getSelectedItem())
                         .toString().replace("''", "")));
-                MainFrame.manager.saveLenses();
+                Manager.saveLenses();
                 new LensesFrame();
                 dispose();
             } else JOptionPane.showConfirmDialog(LensesFrame.this,
@@ -54,14 +55,14 @@ public class LensesFrame extends JFrame {
         deleteButton.setVisible(false);
         saveButton.setVisible(false);
 
-        String[] array = new String[MainFrame.manager.lenses.toArray().length];
-        for (int i=0;i<MainFrame.manager.lenses.toArray().length;i++) {
-            array[i] = ((Lens) MainFrame.manager.lenses.toArray()[i]).getName();
+        String[] array = new String[Manager.lenses.toArray().length];
+        for (int i=0;i<Manager.lenses.toArray().length;i++) {
+            array[i] = ((Lens) Manager.lenses.toArray()[i]).getName();
         }
         listLenses.setListData(array);
 
         listLenses.addListSelectionListener(e -> {
-            Lens lens = MainFrame.manager.lenses.get(listLenses.getSelectedIndex());
+            Lens lens = Manager.lenses.get(listLenses.getSelectedIndex());
             textFieldName.setText(lens.getName());
             textFieldFactor.setText(lens.getFactor() + "");
             if (lens.getConnection() == 1.25) comboBoxConnection.setSelectedIndex(0);

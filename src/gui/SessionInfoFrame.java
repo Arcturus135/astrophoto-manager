@@ -5,72 +5,78 @@ import lib.*;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class CreateSessionFrame extends JFrame {
+public class SessionInfoFrame extends JFrame {
     private JTextField textFieldName;
-    private JComboBox comboBoxTelescope;
+    private JTextField textFieldDate;
     private JComboBox comboBoxCamera;
-    private JComboBox comboBoxFilter;
+    private JComboBox comboBoxTelescope;
     private JComboBox comboBoxLens;
-    private JTextField textFieldTemp;
+    private JScrollPane filtersScrollPane;
+    private JTextField textFieldTemperature;
     private JTextField textFieldExposure;
     private JTextField textFieldNumber;
     private JTextField textFieldGain;
     private JButton cancelButton;
     private JButton saveButton;
     private JPanel panel;
-    private JTextField textFieldDate;
+    private JComboBox comboBoxFilter;
 
-    private Astrophoto astrophoto;
+    private Session session;
 
-    public CreateSessionFrame(Astrophoto astrophoto) {
-        this.astrophoto = astrophoto;
-
+    public SessionInfoFrame(Session session) {
+        this.session = session;
         setContentPane(panel);
-        setTitle("Create Session");
-        setSize(480, 480);
+        setTitle("Session");
+        setSize(600, 500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-        setLocation(920, 210);
+        setLocation(810, 200);
 
-        setup();
-        block();
+        setUp();
+        fillValues();
 
         cancelButton.addActionListener(e -> dispose());
 
         saveButton.addActionListener(e -> {
             if (checkInputs()) {
+                session.setName(textFieldName.getText());
+                session.setDate(getDate());
+
                 Camera camera = null;
                 if (comboBoxCamera.getSelectedIndex() != 0)
                     camera = Manager.cameras.get(comboBoxCamera.getSelectedIndex()-1);
                 Telescope telescope = null;
                 if (comboBoxTelescope.getSelectedIndex() != 0)
                     telescope = Manager.telescopes.get(comboBoxTelescope.getSelectedIndex()-1);
-                Filter filter = null;
-                if (comboBoxFilter.getSelectedIndex() != 0)
-                    filter = Manager.filters.get(comboBoxFilter.getSelectedIndex()-1);
                 Lens lens = null;
                 if (comboBoxLens.getSelectedIndex() != 0)
                     lens = Manager.lenses.get(comboBoxLens.getSelectedIndex()-1);
+                Filter filter = null;
+                if (comboBoxFilter.getSelectedIndex() != 0)
+                    filter = Manager.filters.get(comboBoxFilter.getSelectedIndex()-1);
 
-
-                Session session = new Session(textFieldName.getText(), getDate(), camera, filter, telescope, lens,
-                        Double.parseDouble(textFieldTemp.getText()), Double.parseDouble(textFieldExposure.getText()),
-                        Integer.parseInt(textFieldNumber.getText()), Integer.parseInt(textFieldGain.getText()));
-                Manager.sessions.add(session);
+                session.setCamera(camera);
+                session.setTelescope(telescope);
+                session.setLens(lens);
+                session.setFilter(filter);
+                session.setTemp(Double.parseDouble(textFieldTemperature.getText()));
+                session.setExposure(Double.parseDouble(textFieldExposure.getText()));
+                session.setNumber(Integer.parseInt(textFieldNumber.getText()));
+                session.setGain(Integer.parseInt(textFieldGain.getText()));
                 Manager.saveSessions();
-                astrophoto.addSession(session);
-                Manager.saveAstrophotos();
+                new SessionInfoFrame(session);
                 dispose();
-            } else {
-                JOptionPane.showConfirmDialog(CreateSessionFrame.this,
-                        "At least one of your input values does not fit. Please try to correct them.",
-                        "Invalid values", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-            }
+            } else JOptionPane.showConfirmDialog(SessionInfoFrame.this,
+                    "At least one of your input values does not fit. Please try to correct them.",
+                    "Invalid values", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
         });
     }
 
-    private void setup() {
+    private void setUp() {
         comboBoxTelescope.addItem(" --- ");
         for (Telescope telescope : Manager.telescopes) comboBoxTelescope.addItem(telescope.getName());
         comboBoxCamera.addItem(" --- ");
@@ -81,24 +87,22 @@ public class CreateSessionFrame extends JFrame {
         for (Lens lens : Manager.lenses) comboBoxLens.addItem(lens.getName());
     }
 
+    private void fillValues() {
+        textFieldName.setText(session.getName());
+        textFieldDate.setText(session.getDateAsString());
+        comboBoxCamera.setSelectedIndex(session.getCamera() != null ? Manager.cameras.indexOf(session.getCamera())+1 : 0);
+        comboBoxTelescope.setSelectedIndex(session.getTelescope() != null ? Manager.telescopes.indexOf(session.getTelescope())+1 : 0);
+        comboBoxLens.setSelectedIndex(session.getLens() != null ? Manager.lenses.indexOf(session.getLens())+1 : 0);
+        comboBoxFilter.setSelectedIndex(session.getFilter() != null ? Manager.filters.indexOf(session.getFilter())+1 : 0);
+        textFieldTemperature.setText(session.getTemp() + "");
+        textFieldExposure.setText(session.getExposure() + "");
+        textFieldNumber.setText(session.getNumber() + "");
+        textFieldGain.setText(session.getGain() + "");
+    }
+
     private LocalDate getDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return LocalDate.parse(textFieldDate.getText(), formatter);
-    }
-
-    private void block() {
-        if (astrophoto.getCamera() != null) {
-            comboBoxCamera.setSelectedIndex(Manager.cameras.indexOf(astrophoto.getCamera()) + 1);
-            comboBoxCamera.setEnabled(false);
-        }
-        if (astrophoto.getTelescope() != null) {
-            comboBoxTelescope.setSelectedIndex(Manager.telescopes.indexOf(astrophoto.getTelescope()) + 1);
-            comboBoxTelescope.setEnabled(false);
-        }
-        if (astrophoto.getLens() != null) {
-            comboBoxLens.setSelectedIndex(Manager.lenses.indexOf(astrophoto.getLens()) + 1);
-            comboBoxLens.setEnabled(false);
-        }
     }
 
     public boolean checkInputs() {
@@ -107,10 +111,10 @@ public class CreateSessionFrame extends JFrame {
             if (textFieldExposure.getText().equalsIgnoreCase("")) return false;
             if (textFieldGain.getText().equalsIgnoreCase("")) return false;
             if (textFieldNumber.getText().equalsIgnoreCase("")) return false;
-            if (textFieldTemp.getText().equalsIgnoreCase("")) return false;
+            if (textFieldTemperature.getText().equalsIgnoreCase("")) return false;
             if (textFieldDate.getText().equalsIgnoreCase("")) return false;
             Double.parseDouble(textFieldExposure.getText());
-            Double.parseDouble(textFieldTemp.getText());
+            Double.parseDouble(textFieldTemperature.getText());
             Integer.parseInt(textFieldNumber.getText());
             Integer.parseInt(textFieldGain.getText());
             getDate();

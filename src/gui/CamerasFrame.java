@@ -1,6 +1,7 @@
 package gui;
 
 import lib.Camera;
+import lib.Manager;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -40,15 +41,15 @@ public class CamerasFrame extends JFrame {
         });
 
         deleteButton.addActionListener(e -> {
-            Camera camera = MainFrame.manager.cameras.get(listCameras.getSelectedIndex());
-            MainFrame.manager.cameras.remove(camera);
-            MainFrame.manager.saveCameras();
+            Camera camera = Manager.cameras.get(listCameras.getSelectedIndex());
+            Manager.cameras.remove(camera);
+            Manager.saveCameras();
             dispose();
         });
 
         saveButton.addActionListener(e -> {
             if (checkInputs()) {
-                Camera camera = MainFrame.manager.cameras.get(listCameras.getSelectedIndex());
+                Camera camera = Manager.cameras.get(listCameras.getSelectedIndex());
                 camera.setName(textFieldName.getText());
                 camera.setMgp(Integer.parseInt(textFieldMGP.getText()));
                 camera.setResX(Integer.parseInt(textFieldResX.getText()));
@@ -56,7 +57,7 @@ public class CamerasFrame extends JFrame {
                 camera.setConnection(Double.parseDouble(Objects.requireNonNull(comboBox1.getSelectedItem()).toString()
                         .replace("''", "")));
                 camera.setColor(colorCheckBox.isSelected());
-                MainFrame.manager.saveCameras();
+                Manager.saveCameras();
                 new CamerasFrame();
                 dispose();
             } else JOptionPane.showConfirmDialog(CamerasFrame.this,
@@ -69,16 +70,16 @@ public class CamerasFrame extends JFrame {
         deleteButton.setVisible(false);
         saveButton.setVisible(false);
 
-        String[] array = new String[MainFrame.manager.cameras.toArray().length];
-        for (int i=0;i<MainFrame.manager.cameras.toArray().length;i++) {
-            array[i] = ((Camera) MainFrame.manager.cameras.toArray()[i]).getName();
+        String[] array = new String[Manager.cameras.toArray().length];
+        for (int i=0;i<Manager.cameras.toArray().length;i++) {
+            array[i] = ((Camera) Manager.cameras.toArray()[i]).getName();
         }
         listCameras.setListData(array);
 
         listCameras.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                Camera camera = MainFrame.manager.cameras.get(listCameras.getSelectedIndex());
+                Camera camera = Manager.cameras.get(listCameras.getSelectedIndex());
                 textFieldName.setText(camera.getName());
                 textFieldMGP.setText(camera.getMgp() + "");
                 textFieldResX.setText(camera.getResX() + "");

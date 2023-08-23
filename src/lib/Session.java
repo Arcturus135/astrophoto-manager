@@ -57,10 +57,10 @@ public class Session extends Storeable {
         object.put("id", id);
         object.put("name", name);
         object.put("date", getDateAsString());
-        object.put("camera", camera.getId());
-        object.put("filter", filter.getId());
-        object.put("telescope", telescope.getId());
-        object.put("lens", lens.getId());
+        object.put("camera", camera != null ? camera.getId() : 0);
+        object.put("filter", filter != null ? filter.getId() : 0);
+        object.put("telescope", telescope != null ? telescope.getId() : 0);
+        object.put("lens", lens != null ? lens.getId() : 0);
         object.put("temp", temp);
         object.put("exposure", exposure);
         object.put("number", number);
@@ -69,10 +69,10 @@ public class Session extends Storeable {
     }
 
     public static Session fromJSONObject(JSONObject object) {
-        Camera c = (Camera) getObject(object.getLong("camera"));
-        Telescope t = (Telescope) getObject(object.getLong("telescope"));
-        Lens l = (Lens) getObject(object.getLong("lens"));
-        Filter f = (Filter) getObject(object.getLong("filter"));
+        Camera c = (Camera) Manager.getObject(object.getLong("camera"), Manager.cameras);
+        Telescope t = (Telescope) Manager.getObject(object.getLong("telescope"), Manager.telescopes);
+        Lens l = (Lens) Manager.getObject(object.getLong("lens"), Manager.lenses);
+        Filter f = (Filter) Manager.getObject(object.getLong("filter"), Manager.filters);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate d =  LocalDate.parse(object.getString("date"), formatter);
 
@@ -94,14 +94,6 @@ public class Session extends Storeable {
         if (date.getMonthValue()<10) month = "0" + month;
         String year = date.getYear() + "";
         return day + "." + month + "." + year;
-    }
-
-    public static Storeable getObject(long id) {
-        for (Storeable storeable : MainFrame.manager.cameras) if (storeable.getId() == id) return storeable;
-        for (Storeable storeable : MainFrame.manager.telescopes) if (storeable.getId() == id) return storeable;
-        for (Storeable storeable : MainFrame.manager.lenses) if (storeable.getId() == id) return storeable;
-        for (Storeable storeable : MainFrame.manager.filters) if (storeable.getId() == id) return storeable;
-        return null;
     }
 
     @Override

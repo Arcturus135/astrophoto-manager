@@ -1,6 +1,7 @@
 package gui;
 
 import lib.Camera;
+import lib.Manager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,8 +35,8 @@ public class CreateCameraFrame extends JFrame {
                         Integer.parseInt(textFieldResX.getText()), Integer.parseInt(textFieldResY.getText()),
                         Double.parseDouble(Objects.requireNonNull(comboBoxConnection.getSelectedItem()).toString().replace("''", "")),
                         colorCheckBox.isSelected());
-                MainFrame.manager.cameras.add(camera);
-                MainFrame.manager.saveCameras();
+                Manager.cameras.add(camera);
+                Manager.saveCameras();
                 dispose();
             } else {
                 JOptionPane.showConfirmDialog(CreateCameraFrame.this,

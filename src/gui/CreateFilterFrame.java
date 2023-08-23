@@ -1,6 +1,7 @@
 package gui;
 
 import lib.Filter;
+import lib.Manager;
 
 import javax.swing.*;
 import java.util.Objects;
@@ -27,8 +28,8 @@ public class CreateFilterFrame extends JFrame {
                 Filter filter = new Filter(textFieldName.getText(),
                         Double.parseDouble(Objects.requireNonNull(comboBoxConnection.getSelectedItem())
                                 .toString().replace("''", "")));
-                MainFrame.manager.filters.add(filter);
-                MainFrame.manager.saveFilters();
+                Manager.filters.add(filter);
+                Manager.saveFilters();
                 dispose();
             } else {
                 JOptionPane.showConfirmDialog(CreateFilterFrame.this,

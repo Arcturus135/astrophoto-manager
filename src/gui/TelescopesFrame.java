@@ -1,5 +1,6 @@
 package gui;
 
+import lib.Manager;
 import lib.Telescope;
 
 import javax.swing.*;
@@ -27,19 +28,19 @@ public class TelescopesFrame extends JFrame {
         newTelescopeButton.addActionListener(e -> new CreateTelescopeFrame());
 
         deleteButton.addActionListener(e -> {
-            Telescope telescope = MainFrame.manager.telescopes.get(listTelescopes.getSelectedIndex());
-            MainFrame.manager.telescopes.remove(telescope);
-            MainFrame.manager.saveTelescopes();
+            Telescope telescope = Manager.telescopes.get(listTelescopes.getSelectedIndex());
+            Manager.telescopes.remove(telescope);
+            Manager.saveTelescopes();
             dispose();
         });
 
         saveButton.addActionListener(e -> {
             if (checkInputs()) {
-                Telescope telescope = MainFrame.manager.telescopes.get(listTelescopes.getSelectedIndex());
+                Telescope telescope = Manager.telescopes.get(listTelescopes.getSelectedIndex());
                 telescope.setName(textFieldName.getText());
                 telescope.setAperture(Integer.parseInt(textFieldAperture.getText()));
                 telescope.setFocal_length(Integer.parseInt(textFieldFocalLength.getText()));
-                MainFrame.manager.saveTelescopes();
+                Manager.saveTelescopes();
                 new TelescopesFrame();
                 dispose();
             } else JOptionPane.showConfirmDialog(TelescopesFrame.this,
@@ -52,14 +53,14 @@ public class TelescopesFrame extends JFrame {
         deleteButton.setVisible(false);
         saveButton.setVisible(false);
 
-        String[] array = new String[MainFrame.manager.telescopes.toArray().length];
-        for (int i=0;i<MainFrame.manager.telescopes.toArray().length;i++) {
-            array[i] = ((Telescope) MainFrame.manager.telescopes.toArray()[i]).getName();
+        String[] array = new String[Manager.telescopes.toArray().length];
+        for (int i=0;i<Manager.telescopes.toArray().length;i++) {
+            array[i] = ((Telescope) Manager.telescopes.toArray()[i]).getName();
         }
         listTelescopes.setListData(array);
 
         listTelescopes.addListSelectionListener(e -> {
-            Telescope telescope = MainFrame.manager.telescopes.get(listTelescopes.getSelectedIndex());
+            Telescope telescope = Manager.telescopes.get(listTelescopes.getSelectedIndex());
             textFieldName.setText(telescope.getName());
             textFieldAperture.setText(telescope.getAperture() + "");
             textFieldFocalLength.setText(telescope.getFocal_length() + "");
