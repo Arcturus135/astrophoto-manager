@@ -5,7 +5,7 @@ import lib.Telescope;
 
 import javax.swing.*;
 
-public class CreateTelescopeFrame extends JFrame {
+public class CreateTelescopeFrame extends CustomFrame {
     private JTextField textFieldName;
     private JTextField textFieldAperture;
     private JTextField textFieldFocalLength;
@@ -20,6 +20,8 @@ public class CreateTelescopeFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(920, 210);
+
+        Frames.frames.add(this);
 
         cancelButton.addActionListener(e -> dispose());
 
@@ -50,5 +52,10 @@ public class CreateTelescopeFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

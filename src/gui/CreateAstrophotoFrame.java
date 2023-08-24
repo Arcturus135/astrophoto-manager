@@ -5,7 +5,7 @@ import lib.Manager;
 
 import javax.swing.*;
 
-public class CreateAstrophotoFrame extends JFrame {
+public class CreateAstrophotoFrame extends CustomFrame {
     private JTextField textFieldName;
     private JCheckBox finishedCheckBox;
     private JButton openImageButton;
@@ -22,6 +22,8 @@ public class CreateAstrophotoFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(920, 210);
+
+        Frames.frames.add(this);
 
         setup();
 
@@ -54,5 +56,10 @@ public class CreateAstrophotoFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

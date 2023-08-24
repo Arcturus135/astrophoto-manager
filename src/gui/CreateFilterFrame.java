@@ -6,7 +6,7 @@ import lib.Manager;
 import javax.swing.*;
 import java.util.Objects;
 
-public class CreateFilterFrame extends JFrame {
+public class CreateFilterFrame extends CustomFrame {
     private JTextField textFieldName;
     private JComboBox comboBoxConnection;
     private JButton cancelButton;
@@ -20,6 +20,8 @@ public class CreateFilterFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(920, 210);
+
+        Frames.frames.add(this);
 
         cancelButton.addActionListener(e -> dispose());
 
@@ -46,5 +48,10 @@ public class CreateFilterFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

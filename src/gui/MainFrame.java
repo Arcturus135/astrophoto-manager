@@ -8,11 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends CustomFrame {
     private JButton newPhotoButton;
     private JButton telescopesButton;
     private JButton camerasButton;
@@ -34,6 +36,9 @@ public class MainFrame extends JFrame {
         setVisible(true);
 
         Manager.init();
+        Frames.init();
+
+        Frames.frames.add(this);
 
         newPhotoButton.addActionListener(e -> new CreateAstrophotoFrame());
 
@@ -42,15 +47,8 @@ public class MainFrame extends JFrame {
         filtersButton.addActionListener(e -> new FiltersFrame());
         lensesButton.addActionListener(e -> new LensesFrame());
 
-        String[] array = new String[Manager.astrophotos.toArray().length];
-        for (int i=0;i<Manager.astrophotos.toArray().length;i++) {
-            array[i] = ((Astrophoto) Manager.astrophotos.toArray()[i]).getName();
-        }
-        listAstrophotos.setListData(array);
+        update();
 
-        deleteButton.setVisible(false);
-        editButton.setVisible(false);
-        exportJsonButton.setVisible(false);
         listAstrophotos.addListSelectionListener(e -> {
             deleteButton.setVisible(listAstrophotos.getSelectedValue() != null);
             editButton.setVisible(listAstrophotos.getSelectedValue() != null);
@@ -67,8 +65,6 @@ public class MainFrame extends JFrame {
             jsonObject.put("lens", astrophoto.getLens() != null ? astrophoto.getLens().toJSONObject() : null);
             jsonObject.put("sessions", getSessionsAsArray(astrophoto));
             jsonObject.put("filters", getFiltersAsArray(astrophoto));
-
-            //System.out.println(jsonObject.toString(2));
 
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
@@ -116,5 +112,18 @@ public class MainFrame extends JFrame {
         jsonObject.put("lens", session.getLens() != null ? session.getLens().toJSONObject() : null);
         jsonObject.put("filter", session.getFilter() != null ? session.getFilter().toJSONObject() : null);
         return jsonObject;
+    }
+
+    @Override
+    public void update() {
+        String[] array = new String[Manager.astrophotos.toArray().length];
+        for (int i=0;i<Manager.astrophotos.toArray().length;i++) {
+            array[i] = ((Astrophoto) Manager.astrophotos.toArray()[i]).getName();
+        }
+        listAstrophotos.setListData(array);
+
+        deleteButton.setVisible(false);
+        editButton.setVisible(false);
+        exportJsonButton.setVisible(false);
     }
 }

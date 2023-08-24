@@ -6,7 +6,7 @@ import lib.Manager;
 import javax.swing.*;
 import java.util.Objects;
 
-public class LensesFrame extends JFrame {
+public class LensesFrame extends CustomFrame {
     private JPanel panel;
     private JList listLenses;
     private JTextField textFieldName;
@@ -23,6 +23,8 @@ public class LensesFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(810, 200);
+
+        Frames.frames.add(this);
 
         setupList();
 
@@ -82,5 +84,10 @@ public class LensesFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+        setupList();
     }
 }

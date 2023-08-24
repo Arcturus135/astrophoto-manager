@@ -5,11 +5,8 @@ import lib.*;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public class SessionInfoFrame extends JFrame {
+public class SessionInfoFrame extends CustomFrame {
     private JTextField textFieldName;
     private JTextField textFieldDate;
     private JComboBox comboBoxCamera;
@@ -35,6 +32,8 @@ public class SessionInfoFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(810, 200);
+
+        Frames.frames.add(this);
 
         setUp();
         fillValues();
@@ -122,5 +121,10 @@ public class SessionInfoFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+        fillValues();
     }
 }

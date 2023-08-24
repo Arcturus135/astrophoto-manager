@@ -5,7 +5,7 @@ import lib.Telescope;
 
 import javax.swing.*;
 
-public class TelescopesFrame extends JFrame {
+public class TelescopesFrame extends CustomFrame {
     private JPanel panel;
     private JList listTelescopes;
     private JTextField textFieldName;
@@ -22,6 +22,8 @@ public class TelescopesFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(810, 200);
+
+        Frames.frames.add(this);
 
         setupList();
 
@@ -81,5 +83,10 @@ public class TelescopesFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+        setupList();
     }
 }

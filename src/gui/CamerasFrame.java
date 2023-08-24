@@ -4,13 +4,11 @@ import lib.Camera;
 import lib.Manager;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class CamerasFrame extends JFrame {
+public class CamerasFrame extends CustomFrame {
     private JList listCameras;
     private JTextField textFieldName;
     private JTextField textFieldMGP;
@@ -31,14 +29,11 @@ public class CamerasFrame extends JFrame {
         setVisible(true);
         setLocation(810, 200);
 
+        Frames.frames.add(this);
+
         setupList();
 
-        newCameraButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new CreateCameraFrame();
-            }
-        });
+        newCameraButton.addActionListener(e -> new CreateCameraFrame());
 
         deleteButton.addActionListener(e -> {
             Camera camera = Manager.cameras.get(listCameras.getSelectedIndex());
@@ -76,20 +71,17 @@ public class CamerasFrame extends JFrame {
         }
         listCameras.setListData(array);
 
-        listCameras.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                Camera camera = Manager.cameras.get(listCameras.getSelectedIndex());
-                textFieldName.setText(camera.getName());
-                textFieldMGP.setText(camera.getMgp() + "");
-                textFieldResX.setText(camera.getResX() + "");
-                textFieldResY.setText(camera.getResY() + "");
-                if (camera.getConnection() == 1.25) comboBox1.setSelectedIndex(0); else comboBox1.setSelectedIndex(1);
-                colorCheckBox.setSelected(camera.isColor());
+        listCameras.addListSelectionListener(e -> {
+            Camera camera = Manager.cameras.get(listCameras.getSelectedIndex());
+            textFieldName.setText(camera.getName());
+            textFieldMGP.setText(camera.getMgp() + "");
+            textFieldResX.setText(camera.getResX() + "");
+            textFieldResY.setText(camera.getResY() + "");
+            if (camera.getConnection() == 1.25) comboBox1.setSelectedIndex(0); else comboBox1.setSelectedIndex(1);
+            colorCheckBox.setSelected(camera.isColor());
 
-                deleteButton.setVisible(true);
-                saveButton.setVisible(true);
-            }
+            deleteButton.setVisible(true);
+            saveButton.setVisible(true);
         });
     }
 
@@ -106,5 +98,10 @@ public class CamerasFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+        setupList();
     }
 }

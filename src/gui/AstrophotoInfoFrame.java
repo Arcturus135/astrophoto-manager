@@ -1,21 +1,16 @@
 package gui;
 
 import lib.Astrophoto;
-import lib.Filter;
 import lib.Manager;
 import lib.Session;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.util.Arrays;
-import java.util.Objects;
 
-public class AstrophotoInfoFrame extends JFrame {
+public class AstrophotoInfoFrame extends CustomFrame {
     private JTextField textFieldName;
     private JTextField textFieldCamera;
     private JLabel lbl_date1;
@@ -44,15 +39,19 @@ public class AstrophotoInfoFrame extends JFrame {
         this.astrophoto = astrophoto;
         setContentPane(panel);
         setTitle("Astrophoto");
-        setSize(600, 500);
+        setSize(650, 550);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(810, 200);
+
+        Frames.frames.add(this);
 
         setUp();
         fillValues();
 
         newSessionButton.addActionListener(e -> new CreateSessionFrame(astrophoto));
+
+        cancelButton.addActionListener(e -> dispose());
 
         deleteButton.addActionListener(e -> {
             Session session = Manager.sessions.get(listSessions.getSelectedIndex());
@@ -93,9 +92,11 @@ public class AstrophotoInfoFrame extends JFrame {
                     Manager.saveAstrophotos();
                     System.out.println(astrophoto.toJSONObject().toString(2));
                     try {
-                        Image img = ImageIO.read(file);
-                        ImageIcon icon = new ImageIcon(img);
-                        imageButton.setIcon(icon);                                                                  //RESIZE HERE
+                        Image img = ImageIO.read(new File(astrophoto.getPath_to_img()));
+                        Image resizedImg = img.getScaledInstance(250, 170,  java.awt.Image.SCALE_SMOOTH) ;
+                        ImageIcon icon = new ImageIcon(resizedImg);
+                        imageButton.setIcon(icon);
+                        imageButton.setText("");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -119,10 +120,14 @@ public class AstrophotoInfoFrame extends JFrame {
             editButton.setEnabled(true);
         });
 
+        finishedCheckBox.addActionListener(e -> imageButton.setEnabled(finishedCheckBox.isSelected()));
+
         try {
             Image img = ImageIO.read(new File(astrophoto.getPath_to_img()));
-            ImageIcon icon = new ImageIcon(img);
-            imageButton.setIcon(icon);                                                                           //RESIZE HERE
+            Image resizedImg = img.getScaledInstance(250, 170,  Image.SCALE_DEFAULT) ;
+            ImageIcon icon = new ImageIcon(resizedImg);
+            imageButton.setIcon(icon);
+            imageButton.setText("");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -152,6 +157,8 @@ public class AstrophotoInfoFrame extends JFrame {
         listFilters.setListData(array);
 
         lbl_url.setText(astrophoto.getPath_to_img());
+
+        imageButton.setEnabled(finishedCheckBox.isSelected());
     }
 
     public boolean checkInputs() {
@@ -161,5 +168,10 @@ public class AstrophotoInfoFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+        fillValues();
     }
 }

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class CreateSessionFrame extends JFrame {
+public class CreateSessionFrame extends CustomFrame {
     private JTextField textFieldName;
     private JComboBox comboBoxTelescope;
     private JComboBox comboBoxCamera;
@@ -32,6 +32,8 @@ public class CreateSessionFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(920, 210);
+
+        Frames.frames.add(this);
 
         setup();
         block();
@@ -118,5 +120,10 @@ public class CreateSessionFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

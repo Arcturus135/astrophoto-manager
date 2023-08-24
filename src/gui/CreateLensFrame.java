@@ -6,7 +6,7 @@ import lib.Manager;
 import javax.swing.*;
 import java.util.Objects;
 
-public class CreateLensFrame extends JFrame {
+public class CreateLensFrame extends CustomFrame {
     private JPanel panel;
     private JTextField textFieldName;
     private JTextField textFieldFactor;
@@ -21,6 +21,8 @@ public class CreateLensFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(920, 210);
+
+        Frames.frames.add(this);
 
         cancelButton.addActionListener(e -> dispose());
 
@@ -49,5 +51,10 @@ public class CreateLensFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

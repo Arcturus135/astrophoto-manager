@@ -4,11 +4,9 @@ import lib.Camera;
 import lib.Manager;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class CreateCameraFrame extends JFrame {
+public class CreateCameraFrame extends CustomFrame {
     private JCheckBox colorCheckBox;
     private JButton saveButton;
     private JTextField textFieldName;
@@ -26,6 +24,8 @@ public class CreateCameraFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(920, 210);
+
+        Frames.frames.add(this);
 
         cancelButton.addActionListener(e -> dispose());
 
@@ -59,5 +59,10 @@ public class CreateCameraFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

@@ -6,7 +6,7 @@ import lib.Manager;
 import javax.swing.*;
 import java.util.Objects;
 
-public class FiltersFrame extends JFrame {
+public class FiltersFrame extends CustomFrame {
     private JList listFilters;
     private JTextField textFieldName;
     private JComboBox comboBoxConnection;
@@ -22,6 +22,8 @@ public class FiltersFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         setLocation(810, 200);
+
+        Frames.frames.add(this);
 
         setupList();
 
@@ -77,5 +79,10 @@ public class FiltersFrame extends JFrame {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+        setupList();
     }
 }
