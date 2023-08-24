@@ -1,13 +1,16 @@
 package lib;
 
-import gui.MainFrame;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
+@SuppressWarnings({"unused", "unchecked"})
 public class Astrophoto extends Storeable {
 
     private long id;
@@ -92,8 +95,12 @@ public class Astrophoto extends Storeable {
         Telescope t = object.getLong("telescope") != 0 ? (Telescope) Manager.getObject(object.getLong("telescope"), Manager.telescopes) : null;
         Lens l = object.getLong("lens") != 0 ? (Lens) Manager.getObject(object.getLong("lens"), Manager.lenses) : null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        LocalDate ds =  LocalDate.parse(object.getString("dateStart"), formatter);
-        LocalDate de =  LocalDate.parse(object.getString("dateEnd"), formatter);
+        LocalDate ds = LocalDate.now();
+        LocalDate de = LocalDate.now();
+        try {
+            ds = LocalDate.parse(object.getString("dateStart"), formatter);
+            de = LocalDate.parse(object.getString("dateEnd"), formatter);
+        } catch (DateTimeParseException ignored) {}
         List<Double> ts = getTempsFromJSONArray(object.getJSONArray("temps"));
         List<Integer> gs = getGainsFromJSONArray(object.getJSONArray("gains"));
 
@@ -130,7 +137,8 @@ public class Astrophoto extends Storeable {
     private static List<? extends Storeable> getFromJSONArray(JSONArray array, List<? extends Storeable> l) {
         List<Storeable> list = new ArrayList<>();
         for (int i=0;i<array.length();i++) {
-            list.add(Manager.getObject(array.getLong(i), l));
+            Storeable storeable = Manager.getObject(array.getLong(i), l);
+            if (storeable != null) list.add(storeable);
         }
         return list;
     }
@@ -190,7 +198,9 @@ public class Astrophoto extends Storeable {
         } else {
             this.camera = sessions.get(0).getCamera();
             this.filters = new ArrayList<>();
-            for (Session session : sessions) if (session.getFilter() != null) filters.add(session.getFilter());
+            for (Session session : sessions) if (session.getFilter() != null)
+                if (!filters.contains(session.getFilter()))
+                    filters.add(session.getFilter());
             this.telescope = sessions.get(0).getTelescope();
             this.lens = sessions.get(0).getLens();
             this.dateStart = getLowestDate();

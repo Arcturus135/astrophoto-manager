@@ -6,12 +6,13 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@SuppressWarnings({"unused"})
 public class SessionInfoFrame extends CustomFrame {
     private JTextField textFieldName;
     private JTextField textFieldDate;
-    private JComboBox comboBoxCamera;
-    private JComboBox comboBoxTelescope;
-    private JComboBox comboBoxLens;
+    private JComboBox<String> comboBoxCamera;
+    private JComboBox<String> comboBoxTelescope;
+    private JComboBox<String> comboBoxLens;
     private JScrollPane filtersScrollPane;
     private JTextField textFieldTemperature;
     private JTextField textFieldExposure;
@@ -20,9 +21,9 @@ public class SessionInfoFrame extends CustomFrame {
     private JButton cancelButton;
     private JButton saveButton;
     private JPanel panel;
-    private JComboBox comboBoxFilter;
+    private JComboBox<String> comboBoxFilter;
 
-    private Session session;
+    private final Session session;
 
     public SessionInfoFrame(Session session) {
         this.session = session;

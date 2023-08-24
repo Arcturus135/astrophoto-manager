@@ -7,9 +7,9 @@ import javax.swing.*;
 import java.util.Objects;
 
 public class FiltersFrame extends CustomFrame {
-    private JList listFilters;
+    private JList<String> listFilters;
     private JTextField textFieldName;
-    private JComboBox comboBoxConnection;
+    private JComboBox<String> comboBoxConnection;
     private JButton newFilterButton;
     private JButton deleteButton;
     private JButton saveButton;
@@ -33,7 +33,7 @@ public class FiltersFrame extends CustomFrame {
             Filter filter = Manager.filters.get(listFilters.getSelectedIndex());
             Manager.filters.remove(filter);
             Manager.saveFilters();
-            dispose();
+            Frames.update();
         });
 
         saveButton.addActionListener(e -> {
@@ -43,8 +43,7 @@ public class FiltersFrame extends CustomFrame {
                 filter.setConnection(Double.parseDouble(Objects.requireNonNull(comboBoxConnection.getSelectedItem())
                         .toString().replace("''", "")));
                 Manager.saveFilters();
-                new FiltersFrame();
-                dispose();
+                Frames.update();
             } else JOptionPane.showConfirmDialog(FiltersFrame.this,
                     "At least one of your input values does not fit. Please try to correct them.",
                     "Invalid values", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
@@ -62,13 +61,18 @@ public class FiltersFrame extends CustomFrame {
         listFilters.setListData(array);
 
         listFilters.addListSelectionListener(e -> {
-            Filter filter = Manager.filters.get(listFilters.getSelectedIndex());
-            textFieldName.setText(filter.getName());
-            if (filter.getConnection() == 1.25) comboBoxConnection.setSelectedIndex(0);
-            else comboBoxConnection.setSelectedIndex(1);
+            try {
+                Filter filter = Manager.filters.get(listFilters.getSelectedIndex());
+                textFieldName.setText(filter.getName());
+                if (filter.getConnection() == 1.25) comboBoxConnection.setSelectedIndex(0);
+                else comboBoxConnection.setSelectedIndex(1);
 
-            deleteButton.setVisible(true);
-            saveButton.setVisible(true);
+                deleteButton.setVisible(true);
+                saveButton.setVisible(true);
+            } catch (IndexOutOfBoundsException ignored) {
+                textFieldName.setText("");
+                comboBoxConnection.setSelectedIndex(0);
+            }
         });
     }
 

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class CreateFilterFrame extends CustomFrame {
     private JTextField textFieldName;
-    private JComboBox comboBoxConnection;
+    private JComboBox<String> comboBoxConnection;
     private JButton cancelButton;
     private JButton saveButton;
     private JPanel panel;

@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class TelescopesFrame extends CustomFrame {
     private JPanel panel;
-    private JList listTelescopes;
+    private JList<String> listTelescopes;
     private JTextField textFieldName;
     private JTextField textFieldAperture;
     private JTextField textFieldFocalLength;
@@ -33,7 +33,7 @@ public class TelescopesFrame extends CustomFrame {
             Telescope telescope = Manager.telescopes.get(listTelescopes.getSelectedIndex());
             Manager.telescopes.remove(telescope);
             Manager.saveTelescopes();
-            dispose();
+            Frames.update();
         });
 
         saveButton.addActionListener(e -> {
@@ -43,8 +43,7 @@ public class TelescopesFrame extends CustomFrame {
                 telescope.setAperture(Integer.parseInt(textFieldAperture.getText()));
                 telescope.setFocal_length(Integer.parseInt(textFieldFocalLength.getText()));
                 Manager.saveTelescopes();
-                new TelescopesFrame();
-                dispose();
+                Frames.update();
             } else JOptionPane.showConfirmDialog(TelescopesFrame.this,
                     "At least one of your input values does not fit. Please try to correct them.",
                     "Invalid values", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
@@ -62,13 +61,19 @@ public class TelescopesFrame extends CustomFrame {
         listTelescopes.setListData(array);
 
         listTelescopes.addListSelectionListener(e -> {
-            Telescope telescope = Manager.telescopes.get(listTelescopes.getSelectedIndex());
-            textFieldName.setText(telescope.getName());
-            textFieldAperture.setText(telescope.getAperture() + "");
-            textFieldFocalLength.setText(telescope.getFocal_length() + "");
+            try {
+                Telescope telescope = Manager.telescopes.get(listTelescopes.getSelectedIndex());
+                textFieldName.setText(telescope.getName());
+                textFieldAperture.setText(telescope.getAperture() + "");
+                textFieldFocalLength.setText(telescope.getFocal_length() + "");
 
-            deleteButton.setVisible(true);
-            saveButton.setVisible(true);
+                deleteButton.setVisible(true);
+                saveButton.setVisible(true);
+            } catch (IndexOutOfBoundsException exception) {
+                textFieldName.setText("");
+                textFieldAperture.setText("");
+                textFieldFocalLength.setText("");
+            }
         });
     }
 

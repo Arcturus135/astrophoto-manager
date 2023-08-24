@@ -238,7 +238,7 @@
         </constraints>
         <properties>
           <foreground color="-5111808"/>
-          <text value="Cancel"/>
+          <text value="Close"/>
         </properties>
       </component>
       <component id="d47a9" class="javax.swing.JButton" binding="saveButton" default-binding="true">
@@ -256,7 +256,7 @@
         </constraints>
         <properties>
           <foreground color="-5111808"/>
-          <text value="Delete"/>
+          <text value="Delete Session"/>
         </properties>
       </component>
       <component id="99b77" class="javax.swing.JButton" binding="editButton" default-binding="true">
@@ -264,7 +264,7 @@
           <grid row="13" column="3" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Edit"/>
+          <text value="Edit Session"/>
         </properties>
       </component>
     </children>

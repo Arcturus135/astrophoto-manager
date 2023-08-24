@@ -13,7 +13,7 @@ public class CreateCameraFrame extends CustomFrame {
     private JTextField textFieldMGP;
     private JTextField textFieldResX;
     private JTextField textFieldResY;
-    private JComboBox comboBoxConnection;
+    private JComboBox<String> comboBoxConnection;
     private JButton cancelButton;
     private JPanel panel;
 

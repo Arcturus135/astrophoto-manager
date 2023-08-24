@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
 
 public class CreateSessionFrame extends CustomFrame {
     private JTextField textFieldName;
-    private JComboBox comboBoxTelescope;
-    private JComboBox comboBoxCamera;
-    private JComboBox comboBoxFilter;
-    private JComboBox comboBoxLens;
+    private JComboBox<String> comboBoxTelescope;
+    private JComboBox<String> comboBoxCamera;
+    private JComboBox<String> comboBoxFilter;
+    private JComboBox<String> comboBoxLens;
     private JTextField textFieldTemp;
     private JTextField textFieldExposure;
     private JTextField textFieldNumber;
@@ -21,7 +21,7 @@ public class CreateSessionFrame extends CustomFrame {
     private JPanel panel;
     private JTextField textFieldDate;
 
-    private Astrophoto astrophoto;
+    private final Astrophoto astrophoto;
 
     public CreateSessionFrame(Astrophoto astrophoto) {
         this.astrophoto = astrophoto;

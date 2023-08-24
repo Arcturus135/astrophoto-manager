@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
+@SuppressWarnings({"unused"})
 public class Filter extends Storeable {
 
     private long id;

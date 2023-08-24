@@ -8,10 +8,10 @@ import java.util.Objects;
 
 public class LensesFrame extends CustomFrame {
     private JPanel panel;
-    private JList listLenses;
+    private JList<String> listLenses;
     private JTextField textFieldName;
     private JTextField textFieldFactor;
-    private JComboBox comboBoxConnection;
+    private JComboBox<String> comboBoxConnection;
     private JButton newLensButton;
     private JButton deleteButton;
     private JButton saveButton;
@@ -34,7 +34,7 @@ public class LensesFrame extends CustomFrame {
             Lens lens = Manager.lenses.get(listLenses.getSelectedIndex());
             Manager.lenses.remove(lens);
             Manager.saveLenses();
-            dispose();
+            Frames.update();
         });
 
         saveButton.addActionListener(e -> {
@@ -45,8 +45,7 @@ public class LensesFrame extends CustomFrame {
                 lens.setConnection(Double.parseDouble(Objects.requireNonNull(comboBoxConnection.getSelectedItem())
                         .toString().replace("''", "")));
                 Manager.saveLenses();
-                new LensesFrame();
-                dispose();
+                Frames.update();
             } else JOptionPane.showConfirmDialog(LensesFrame.this,
                     "At least one of your input values does not fit. Please try to correct them.",
                     "Invalid values", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
@@ -64,14 +63,20 @@ public class LensesFrame extends CustomFrame {
         listLenses.setListData(array);
 
         listLenses.addListSelectionListener(e -> {
-            Lens lens = Manager.lenses.get(listLenses.getSelectedIndex());
-            textFieldName.setText(lens.getName());
-            textFieldFactor.setText(lens.getFactor() + "");
-            if (lens.getConnection() == 1.25) comboBoxConnection.setSelectedIndex(0);
-            else comboBoxConnection.setSelectedIndex(1);
+            try {
+                Lens lens = Manager.lenses.get(listLenses.getSelectedIndex());
+                textFieldName.setText(lens.getName());
+                textFieldFactor.setText(lens.getFactor() + "");
+                if (lens.getConnection() == 1.25) comboBoxConnection.setSelectedIndex(0);
+                else comboBoxConnection.setSelectedIndex(1);
 
-            deleteButton.setVisible(true);
-            saveButton.setVisible(true);
+                deleteButton.setVisible(true);
+                saveButton.setVisible(true);
+            } catch (IndexOutOfBoundsException exception) {
+                textFieldName.setText("");
+                textFieldFactor.setText("");
+                comboBoxConnection.setSelectedIndex(0);
+            }
         });
     }
 

@@ -19,7 +19,7 @@ public class AstrophotoInfoFrame extends CustomFrame {
     private JLabel lbl_exp;
     private JLabel lbl_gain;
     private JCheckBox finishedCheckBox;
-    private JList listSessions;
+    private JList<String> listSessions;
     private JButton newSessionButton;
     private JButton deleteButton;
     private JButton cancelButton;
@@ -28,12 +28,12 @@ public class AstrophotoInfoFrame extends CustomFrame {
     private JTextField textFieldTelescope;
     private JTextField textFieldPrograms;
     private JTextField textFieldLens;
-    private JList listFilters;
+    private JList<String> listFilters;
     private JButton saveButton;
     private JPanel panel;
     private JButton editButton;
 
-    private Astrophoto astrophoto;
+    private final Astrophoto astrophoto;
 
     public AstrophotoInfoFrame(Astrophoto astrophoto) {
         this.astrophoto = astrophoto;
@@ -55,9 +55,10 @@ public class AstrophotoInfoFrame extends CustomFrame {
 
         deleteButton.addActionListener(e -> {
             Session session = Manager.sessions.get(listSessions.getSelectedIndex());
+            astrophoto.removeSession(session);
             Manager.sessions.remove(session);
             Manager.saveSessions();
-            dispose();
+            Frames.update();
         });
 
         editButton.addActionListener(e -> {
@@ -97,8 +98,7 @@ public class AstrophotoInfoFrame extends CustomFrame {
                         ImageIcon icon = new ImageIcon(resizedImg);
                         imageButton.setIcon(icon);
                         imageButton.setText("");
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                 }
             }
@@ -109,9 +109,9 @@ public class AstrophotoInfoFrame extends CustomFrame {
         deleteButton.setEnabled(false);
         editButton.setEnabled(false);
 
-        String[] array = new String[Manager.sessions.toArray().length];
-        for (int i=0;i<Manager.sessions.toArray().length;i++) {
-            array[i] = ((Session) Manager.sessions.toArray()[i]).getName();
+        String[] array = new String[astrophoto.getSessions().size()];
+        for (int i=0;i<astrophoto.getSessions().size();i++) {
+            array[i] = astrophoto.getSessions().get(i).getName();
         }
         listSessions.setListData(array);
 
@@ -128,8 +128,7 @@ public class AstrophotoInfoFrame extends CustomFrame {
             ImageIcon icon = new ImageIcon(resizedImg);
             imageButton.setIcon(icon);
             imageButton.setText("");
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
@@ -172,6 +171,7 @@ public class AstrophotoInfoFrame extends CustomFrame {
 
     @Override
     public void update() {
+        setUp();
         fillValues();
     }
 }

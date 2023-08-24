@@ -5,24 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aae1efa4-1f19-4351-b8a1-42d203fb254c" name="Changes" comment="-">
-      <change afterPath="$PROJECT_DIR$/src/gui/CustomFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/Frames.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/AstrophotoInfoFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/AstrophotoInfoFrame.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/AstrophotoInfoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/AstrophotoInfoFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/CamerasFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CamerasFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/CreateAstrophotoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CreateAstrophotoFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/CreateCameraFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CreateCameraFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/CreateFilterFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CreateFilterFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/CreateLensFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CreateLensFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/CreateSessionFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CreateSessionFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/CreateTelescopeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CreateTelescopeFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/FiltersFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/FiltersFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/LensesFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/LensesFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/SessionInfoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/SessionInfoFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/TelescopesFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/TelescopesFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Astrophoto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Astrophoto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Lens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Lens.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Telescope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Telescope.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +101,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692807515295</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="-">
+      <option name="closed" value="true" />
+      <created>1692871715163</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1692871715163</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

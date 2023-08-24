@@ -1,12 +1,13 @@
 package lib;
 
-import gui.MainFrame;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Random;
 
+@SuppressWarnings({"unused"})
 public class Session extends Storeable {
 
     private long id;
@@ -74,7 +75,10 @@ public class Session extends Storeable {
         Lens l = (Lens) Manager.getObject(object.getLong("lens"), Manager.lenses);
         Filter f = (Filter) Manager.getObject(object.getLong("filter"), Manager.filters);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        LocalDate d =  LocalDate.parse(object.getString("date"), formatter);
+        LocalDate d = LocalDate.now();
+        try {
+            d = LocalDate.parse(object.getString("date"), formatter);
+        } catch (DateTimeParseException ignored) {}
 
         return new Session(
                 object.getLong("id"),

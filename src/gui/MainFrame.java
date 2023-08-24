@@ -8,12 +8,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+@SuppressWarnings({"unused"})
 public class MainFrame extends CustomFrame {
     private JButton newPhotoButton;
     private JButton telescopesButton;
@@ -22,10 +21,11 @@ public class MainFrame extends CustomFrame {
     private JPanel panel;
     private JButton filtersButton;
     private JButton lensesButton;
-    private JList listAstrophotos;
+    private JList<String> listAstrophotos;
     private JButton deleteButton;
     private JButton editButton;
     private JButton exportJsonButton;
+    private JScrollPane paneAstrophotos;
 
     public MainFrame() {
         setContentPane(panel);
@@ -47,12 +47,21 @@ public class MainFrame extends CustomFrame {
         filtersButton.addActionListener(e -> new FiltersFrame());
         lensesButton.addActionListener(e -> new LensesFrame());
 
+        deleteButton.addActionListener(e -> {
+            Astrophoto astrophoto = Manager.astrophotos.get(listAstrophotos.getSelectedIndex());
+            for (Session session : astrophoto.getSessions()) Manager.sessions.remove(session);
+            Manager.astrophotos.remove(astrophoto);
+            Manager.saveSessions();
+            Manager.saveAstrophotos();
+            Frames.update();
+        });
+
         update();
 
         listAstrophotos.addListSelectionListener(e -> {
-            deleteButton.setVisible(listAstrophotos.getSelectedValue() != null);
-            editButton.setVisible(listAstrophotos.getSelectedValue() != null);
-            exportJsonButton.setVisible(listAstrophotos.getSelectedValue() != null);
+            deleteButton.setEnabled(listAstrophotos.getSelectedValue() != null);
+            editButton.setEnabled(listAstrophotos.getSelectedValue() != null);
+            exportJsonButton.setEnabled(listAstrophotos.getSelectedValue() != null);
         });
 
         editButton.addActionListener(e -> new AstrophotoInfoFrame(Manager.astrophotos.get(listAstrophotos.getSelectedIndex())));
@@ -122,8 +131,8 @@ public class MainFrame extends CustomFrame {
         }
         listAstrophotos.setListData(array);
 
-        deleteButton.setVisible(false);
-        editButton.setVisible(false);
-        exportJsonButton.setVisible(false);
+        deleteButton.setEnabled(false);
+        editButton.setEnabled(false);
+        exportJsonButton.setEnabled(false);
     }
 }

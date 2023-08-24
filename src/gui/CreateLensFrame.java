@@ -10,7 +10,7 @@ public class CreateLensFrame extends CustomFrame {
     private JPanel panel;
     private JTextField textFieldName;
     private JTextField textFieldFactor;
-    private JComboBox comboBoxConnection;
+    private JComboBox<String> comboBoxConnection;
     private JButton cancelButton;
     private JButton saveButton;
 
