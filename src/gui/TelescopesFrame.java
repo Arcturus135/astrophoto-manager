@@ -30,10 +30,12 @@ public class TelescopesFrame extends CustomFrame {
         newTelescopeButton.addActionListener(e -> new CreateTelescopeFrame());
 
         deleteButton.addActionListener(e -> {
-            Telescope telescope = Manager.telescopes.get(listTelescopes.getSelectedIndex());
-            Manager.telescopes.remove(telescope);
-            Manager.saveTelescopes();
-            Frames.update();
+            confirmDialog(() -> {
+                Telescope telescope = Manager.telescopes.get(listTelescopes.getSelectedIndex());
+                Manager.telescopes.remove(telescope);
+                Manager.saveTelescopes();
+                Frames.update();
+            });
         });
 
         saveButton.addActionListener(e -> {

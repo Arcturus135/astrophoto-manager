@@ -48,12 +48,14 @@ public class MainFrame extends CustomFrame {
         lensesButton.addActionListener(e -> new LensesFrame());
 
         deleteButton.addActionListener(e -> {
-            Astrophoto astrophoto = Manager.astrophotos.get(listAstrophotos.getSelectedIndex());
-            for (Session session : astrophoto.getSessions()) Manager.sessions.remove(session);
-            Manager.astrophotos.remove(astrophoto);
-            Manager.saveSessions();
-            Manager.saveAstrophotos();
-            Frames.update();
+            confirmDialog(() -> {
+                Astrophoto astrophoto = Manager.astrophotos.get(listAstrophotos.getSelectedIndex());
+                for (Session session : astrophoto.getSessions()) Manager.sessions.remove(session);
+                Manager.astrophotos.remove(astrophoto);
+                Manager.saveSessions();
+                Manager.saveAstrophotos();
+                Frames.update();
+            });
         });
 
         update();

@@ -31,10 +31,12 @@ public class LensesFrame extends CustomFrame {
         newLensButton.addActionListener(e -> new CreateLensFrame());
 
         deleteButton.addActionListener(e -> {
-            Lens lens = Manager.lenses.get(listLenses.getSelectedIndex());
-            Manager.lenses.remove(lens);
-            Manager.saveLenses();
-            Frames.update();
+            confirmDialog(() -> {
+                Lens lens = Manager.lenses.get(listLenses.getSelectedIndex());
+                Manager.lenses.remove(lens);
+                Manager.saveLenses();
+                Frames.update();
+            });
         });
 
         saveButton.addActionListener(e -> {

@@ -30,10 +30,12 @@ public class FiltersFrame extends CustomFrame {
         newFilterButton.addActionListener(e -> new CreateFilterFrame());
 
         deleteButton.addActionListener(e -> {
-            Filter filter = Manager.filters.get(listFilters.getSelectedIndex());
-            Manager.filters.remove(filter);
-            Manager.saveFilters();
-            Frames.update();
+            confirmDialog(() -> {
+                Filter filter = Manager.filters.get(listFilters.getSelectedIndex());
+                Manager.filters.remove(filter);
+                Manager.saveFilters();
+                Frames.update();
+            });
         });
 
         saveButton.addActionListener(e -> {

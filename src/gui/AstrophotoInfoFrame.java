@@ -54,11 +54,13 @@ public class AstrophotoInfoFrame extends CustomFrame {
         cancelButton.addActionListener(e -> dispose());
 
         deleteButton.addActionListener(e -> {
-            Session session = Manager.sessions.get(listSessions.getSelectedIndex());
-            astrophoto.removeSession(session);
-            Manager.sessions.remove(session);
-            Manager.saveSessions();
-            Frames.update();
+            confirmDialog(() -> {
+                Session session = Manager.sessions.get(listSessions.getSelectedIndex());
+                astrophoto.removeSession(session);
+                Manager.sessions.remove(session);
+                Manager.saveSessions();
+                Frames.update();
+            });
         });
 
         editButton.addActionListener(e -> {
@@ -73,8 +75,7 @@ public class AstrophotoInfoFrame extends CustomFrame {
                 astrophoto.setPath_to_img(lbl_url.getText());
                 astrophoto.setPrograms(textFieldPrograms.getText());
                 Manager.saveAstrophotos();
-                new AstrophotoInfoFrame(astrophoto);
-                dispose();
+                Frames.update();
             } else JOptionPane.showConfirmDialog(AstrophotoInfoFrame.this,
                     "At least one of your input values does not fit. Please try to correct them.",
                     "Invalid values", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);

@@ -34,10 +34,12 @@ public class CamerasFrame extends CustomFrame {
         newCameraButton.addActionListener(e -> new CreateCameraFrame());
 
         deleteButton.addActionListener(e -> {
-            Camera camera = Manager.cameras.get(listCameras.getSelectedIndex());
-            Manager.cameras.remove(camera);
-            Manager.saveCameras();
-            Frames.update();
+            confirmDialog(() -> {
+                Camera camera = Manager.cameras.get(listCameras.getSelectedIndex());
+                Manager.cameras.remove(camera);
+                Manager.saveCameras();
+                Frames.update();
+            });
         });
 
         saveButton.addActionListener(e -> {
