@@ -53,17 +53,15 @@ public class AstrophotoInfoFrame extends CustomFrame {
 
         cancelButton.addActionListener(e -> dispose());
 
-        deleteButton.addActionListener(e -> {
-            confirmDialog(() -> {
-                try {
-                    Session session = Manager.sessions.get(listSessions.getSelectedIndex());
-                    astrophoto.removeSession(session);
-                    Manager.sessions.remove(session);
-                    Manager.saveSessions();
-                    Frames.update();
-                } catch (IndexOutOfBoundsException ignored) {}
-            });
-        });
+        deleteButton.addActionListener(e -> confirmDialog(() -> {
+            try {
+                Session session = Manager.sessions.get(listSessions.getSelectedIndex());
+                astrophoto.removeSession(session);
+                Manager.sessions.remove(session);
+                Manager.saveSessions();
+                Frames.update();
+            } catch (IndexOutOfBoundsException ignored) {}
+        }));
 
         editButton.addActionListener(e -> {
             try {
