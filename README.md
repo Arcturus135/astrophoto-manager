@@ -11,3 +11,4 @@ The installation is pretty easy. You just have to download the astrophoto-manage
 
 # Images
 ![alt text](https://github.com/Arcturus135/astrophoto-manager/blob/master/img/img.png)
+![alt text](https://github.com/Arcturus135/astrophoto-manager/blob/master/img/img_1.png)
