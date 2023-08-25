@@ -7,4 +7,4 @@ If you have any ideas of how to improve it or if there are any issues with this,
 
 # Installation
 
-The installation is pretty easy. You just have to download the astrophoto-manager.jar file and put it in a seperate folder on your computer as it will generate some files to store your data.
+The installation is pretty easy. You just have to download the astrophoto-manager.jar file and put it in a seperate folder on your computer as it will generate some files to store your astrophoto data.
