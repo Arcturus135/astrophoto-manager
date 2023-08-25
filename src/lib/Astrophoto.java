@@ -262,10 +262,10 @@ public class Astrophoto extends Storeable {
                 sec = (int) (exposure % 60);
                 int min = (int) (exposure / 60);
                 if (min >= 60) {
-                    min = (int) (exposure % 3600);
+                    min = (int) ((exposure % 3600) / 60);
                     int h = (int) (exposure / 3600);
                     if (h >= 24) {
-                        h = (int) (exposure % (3600*24));
+                        h = (int) ((exposure % (3600*24)) / 3600);
                         int d = (int) (exposure /(3600*24));
                         return expRemoveZero(d, "d ", h, "h ", min, "m ", sec, "s ", mil, "ms");
                     } else return expRemoveZero(h, "h ", min, "m ", sec, "s ", mil, "ms");
