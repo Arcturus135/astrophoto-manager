@@ -28,8 +28,6 @@ public class CreateAstrophotoFrame extends CustomFrame {
 
         Frames.frames.add(this);
 
-        setup();
-
         cancelButton.addActionListener(e -> dispose());
 
         saveButton.addActionListener(e -> {
@@ -45,31 +43,6 @@ public class CreateAstrophotoFrame extends CustomFrame {
                         "Invalid values", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        openImageButton.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
-            int option = fileChooser.showDialog(this, "Select");
-            if (option == JFileChooser.APPROVE_OPTION) {
-                String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-                File file = new File(selectedFilePath);
-                if (file.exists()) {
-                    try {
-                        Image img = ImageIO.read(new File(selectedFilePath));
-                        Image resizedImg = img.getScaledInstance(250, 170,  java.awt.Image.SCALE_SMOOTH) ;
-                        ImageIcon icon = new ImageIcon(resizedImg);
-                        openImageButton.setIcon(icon);
-                        openImageButton.setText("");
-                    } catch (Exception ignored) {
-                    }
-                }
-            }
-        });
-    }
-
-    private void setup() {
-        openImageButton.setVisible(finishedCheckBox.isSelected());
-        finishedCheckBox.addActionListener(e -> openImageButton.setVisible(finishedCheckBox.isSelected()));
     }
 
     public boolean checkInputs() {

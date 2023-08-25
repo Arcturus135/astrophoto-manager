@@ -32,7 +32,7 @@ public class SessionInfoFrame extends CustomFrame {
         setSize(600, 500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-        setLocation(810, 200);
+        setLocation(830, 220);
 
         Frames.frames.add(this);
 

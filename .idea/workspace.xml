@@ -11,7 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="aae1efa4-1f19-4351-b8a1-42d203fb254c" name="Changes" comment="Initial commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/Astrophoto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Astrophoto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/img.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/AstrophotoInfoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/AstrophotoInfoFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/CreateAstrophotoFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CreateAstrophotoFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/CreateAstrophotoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CreateAstrophotoFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/SessionInfoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/SessionInfoFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692969854322</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1692970481599</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1692970481599</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

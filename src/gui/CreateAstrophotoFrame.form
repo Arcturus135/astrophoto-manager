@@ -38,6 +38,7 @@
         </constraints>
         <properties>
           <text value="Open Image"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="21e4d" class="javax.swing.JTextField" binding="textFieldPrograms">
