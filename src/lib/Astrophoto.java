@@ -3,6 +3,11 @@ package lib;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -43,7 +48,7 @@ public class Astrophoto extends Storeable {
         this.exposure = 0;
         this.gains = new ArrayList<>();
         this.finished = finished;
-        this.path_to_img = path_to_img;
+        setPath_to_img(path_to_img);
         this.programs = programs;
     }
 
@@ -63,7 +68,7 @@ public class Astrophoto extends Storeable {
         this.exposure = exposure;
         this.gains = gains;
         this.finished = finished;
-        this.path_to_img = path_to_img;
+        setPath_to_img(path_to_img);
         this.programs = programs;
     }
 
@@ -383,6 +388,20 @@ public class Astrophoto extends Storeable {
 
     public void setPath_to_img(String path_to_img) {
         this.path_to_img = path_to_img;
+        if (!path_to_img.equalsIgnoreCase("")) {
+            try {
+                BufferedImage originalImage = ImageIO.read(new File(path_to_img));
+                int newWidth = 250;
+                int newHeight = 170;
+                BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
+                Graphics2D g = resizedImage.createGraphics();
+                g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
+                g.dispose();
+                ImageIO.write(resizedImage, "jpg", new File("img\\" + id + ".jpg"));
+                this.path_to_img = "img\\" + id + ".jpg";
+            } catch (IOException ignored) {
+            }
+        }
     }
 
     public void setPrograms(String programs) {

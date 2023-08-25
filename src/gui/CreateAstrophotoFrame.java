@@ -3,7 +3,10 @@ package gui;
 import lib.Astrophoto;
 import lib.Manager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 
 public class CreateAstrophotoFrame extends CustomFrame {
     private JTextField textFieldName;
@@ -40,6 +43,26 @@ public class CreateAstrophotoFrame extends CustomFrame {
                 JOptionPane.showConfirmDialog(CreateAstrophotoFrame.this,
                         "At least one of your input values does not fit. Please try to correct them.",
                         "Invalid values", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        openImageButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.OPEN_DIALOG);
+            int option = fileChooser.showDialog(this, "Select");
+            if (option == JFileChooser.APPROVE_OPTION) {
+                String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+                File file = new File(selectedFilePath);
+                if (file.exists()) {
+                    try {
+                        Image img = ImageIO.read(new File(selectedFilePath));
+                        Image resizedImg = img.getScaledInstance(250, 170,  java.awt.Image.SCALE_SMOOTH) ;
+                        ImageIcon icon = new ImageIcon(resizedImg);
+                        openImageButton.setIcon(icon);
+                        openImageButton.setText("");
+                    } catch (Exception ignored) {
+                    }
+                }
             }
         });
     }
