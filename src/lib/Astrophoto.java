@@ -48,7 +48,7 @@ public class Astrophoto extends Storeable {
         this.exposure = 0;
         this.gains = new ArrayList<>();
         this.finished = finished;
-        setPath_to_img(path_to_img);
+        this.path_to_img = path_to_img;
         this.programs = programs;
     }
 
@@ -68,7 +68,7 @@ public class Astrophoto extends Storeable {
         this.exposure = exposure;
         this.gains = gains;
         this.finished = finished;
-        setPath_to_img(path_to_img);
+        this.path_to_img = path_to_img;
         this.programs = programs;
     }
 
@@ -391,7 +391,7 @@ public class Astrophoto extends Storeable {
     }
 
     public void convertImage(String path_to_img) {
-        setPath_to_img(path_to_img);
+        this.path_to_img = path_to_img;
         if (!path_to_img.equalsIgnoreCase("")) {
             try {
                 System.out.println(path_to_img);
@@ -406,7 +406,7 @@ public class Astrophoto extends Storeable {
                 File newFile = new File(("img\\" + id + ".jpg").replace("-", "n"));
                 newFile.createNewFile();
                 ImageIO.write(resizedImage, "jpg", newFile);
-                this.path_to_img = newFile.getAbsolutePath();
+                this.path_to_img = newFile.getPath();
             } catch (IOException ignored) {
                 ignored.printStackTrace();
             }

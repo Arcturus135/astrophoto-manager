@@ -94,6 +94,7 @@ public class AstrophotoInfoFrame extends CustomFrame {
                 if (file.exists()) {
                     astrophoto.convertImage(selectedFilePath);
                     Manager.saveAstrophotos();
+                    lbl_url.setText(astrophoto.getPath_to_img());
                     System.out.println(astrophoto.toJSONObject().toString(2));
                     try {
                         System.out.println(astrophoto.getPath_to_img());
@@ -105,6 +106,10 @@ public class AstrophotoInfoFrame extends CustomFrame {
                     } catch (Exception ignored) {
                         System.err.println("Unable to load Image");
                         ignored.printStackTrace();
+                        JOptionPane.showConfirmDialog(this,
+                                "This program is not allowed to access this folder.\n" +
+                                        "You can put a copy of this image into the img folder in your program folder.",
+                                "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -129,12 +134,14 @@ public class AstrophotoInfoFrame extends CustomFrame {
         finishedCheckBox.addActionListener(e -> imageButton.setEnabled(finishedCheckBox.isSelected()));
 
         try {
+            System.out.println("File: " + astrophoto.getPath_to_img());
             Image img = ImageIO.read(new File(astrophoto.getPath_to_img()));
             Image resizedImg = img.getScaledInstance(250, 170,  Image.SCALE_DEFAULT) ;
             ImageIcon icon = new ImageIcon(resizedImg);
             imageButton.setIcon(icon);
             imageButton.setText("");
         } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 

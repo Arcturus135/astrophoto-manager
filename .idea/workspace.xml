@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aae1efa4-1f19-4351-b8a1-42d203fb254c" name="Changes" comment="Initial commit">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/AstrophotoInfoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/AstrophotoInfoFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/Astrophoto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Astrophoto.java" afterDir="false" />
@@ -29,6 +28,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Arcturus135"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="ed4282fe-de0d-41e7-902a-4f988298a4ec" />
+        <option name="url" value="https://github.com/Arcturus135/astrophoto-manager.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -181,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692970972450</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1693122135531</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1693122135531</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
