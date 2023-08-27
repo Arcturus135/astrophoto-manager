@@ -10,8 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aae1efa4-1f19-4351-b8a1-42d203fb254c" name="Changes" comment="Initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/json_20230618.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/astrophoto_manager_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/astrophoto_manager_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/astrophoto-manager.jar" beforeDir="false" afterPath="$PROJECT_DIR$/astrophoto-manager.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Astrophoto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Astrophoto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,20 +63,25 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
     "git-widget-placeholder": "master",
     "jdk.selected.JAVA_MODULE": "20",
-    "last_opened_file_path": "C:/Users/paulo/IdeaProjects/astrophoto-manager/src/libraries/json-20230618.jar",
+    "last_opened_file_path": "C:/Users/paulo/IdeaProjects/astrophoto-manager",
     "onboarding.tips.debug.path": "C:/Users/paulo/IdeaProjects/astrophoto-manager/src/Main.java",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "inlay.hints"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\paulo\IdeaProjects\astrophoto-manager" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -224,7 +232,31 @@
       <option name="project" value="LOCAL" />
       <updated>1693123676420</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1693124315304</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1693124315304</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1693124331216</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1693124331216</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1693124397746</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1693124397746</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

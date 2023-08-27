@@ -394,6 +394,9 @@ public class Astrophoto extends Storeable {
         this.path_to_img = path_to_img;
         if (!path_to_img.equalsIgnoreCase("")) {
             try {
+                File newFolder = new File("img\\");
+                if (!newFolder.exists()) newFolder.mkdir();
+
                 System.out.println(path_to_img);
                 File file = new File(path_to_img);
                 BufferedImage originalImage = ImageIO.read(file);
