@@ -388,18 +388,27 @@ public class Astrophoto extends Storeable {
 
     public void setPath_to_img(String path_to_img) {
         this.path_to_img = path_to_img;
+    }
+
+    public void convertImage(String path_to_img) {
+        setPath_to_img(path_to_img);
         if (!path_to_img.equalsIgnoreCase("")) {
             try {
-                BufferedImage originalImage = ImageIO.read(new File(path_to_img));
+                System.out.println(path_to_img);
+                File file = new File(path_to_img);
+                BufferedImage originalImage = ImageIO.read(file);
                 int newWidth = 250;
                 int newHeight = 170;
                 BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
                 Graphics2D g = resizedImage.createGraphics();
                 g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
                 g.dispose();
-                ImageIO.write(resizedImage, "jpg", new File("img\\" + id + ".jpg"));
-                this.path_to_img = "img\\" + id + ".jpg";
+                File newFile = new File(("img\\" + id + ".jpg").replace("-", "n"));
+                newFile.createNewFile();
+                ImageIO.write(resizedImage, "jpg", newFile);
+                this.path_to_img = newFile.getAbsolutePath();
             } catch (IOException ignored) {
+                ignored.printStackTrace();
             }
         }
     }

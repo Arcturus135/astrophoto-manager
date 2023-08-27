@@ -92,16 +92,19 @@ public class AstrophotoInfoFrame extends CustomFrame {
                 String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
                 File file = new File(selectedFilePath);
                 if (file.exists()) {
-                    astrophoto.setPath_to_img(selectedFilePath);
+                    astrophoto.convertImage(selectedFilePath);
                     Manager.saveAstrophotos();
                     System.out.println(astrophoto.toJSONObject().toString(2));
                     try {
+                        System.out.println(astrophoto.getPath_to_img());
                         Image img = ImageIO.read(new File(astrophoto.getPath_to_img()));
                         Image resizedImg = img.getScaledInstance(250, 170,  java.awt.Image.SCALE_SMOOTH) ;
                         ImageIcon icon = new ImageIcon(resizedImg);
                         imageButton.setIcon(icon);
                         imageButton.setText("");
                     } catch (Exception ignored) {
+                        System.err.println("Unable to load Image");
+                        ignored.printStackTrace();
                     }
                 }
             }
